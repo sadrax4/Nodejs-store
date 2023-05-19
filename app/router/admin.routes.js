@@ -4,7 +4,10 @@ const router = require("express").Router();
 /**
  * @swagger
  *  tags:
- *      name: admin-panel
+ *  -   name: admin-panel
+ *      description: manage category
+ * 
+ *  -   name: category(admin-panel)
  *      description: manage category
  */
 router.use("/category", CategoryRoutes);
