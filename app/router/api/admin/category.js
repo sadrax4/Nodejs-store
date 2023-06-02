@@ -3,21 +3,43 @@ const { CategoryController } = require("../../../http/controllers/admin/category
 const router = require("express").Router();
 
 /**
+ * @swagger 
+ *  components:
+ *      schemas:
+ *          AddCategory:
+ *               type: object
+ *               required: 
+ *                  -   title
+ *               properties:
+ *                    title:
+ *                      type: string
+ *                      description: enter title of category
+ *                    parent:
+ *                      type: string
+ *                      description: enter mongo id of parent category
+ *          EditCategoryTitle:
+ *               type: object
+ *               required:
+ *                  -   title
+ *               properties: 
+ *                    title: 
+ *                      type: string
+ *                      description: edit title of category
+ */
+
+/**
  * @swagger
  * /admin/category/add:
  *    post:
  *      summary: add category
  *      description: 
  *      tags: [category(admin-panel)]
- *      parameters:
- *         - name: title
- *           description: select title of category
- *           in: formData
- *           required: true
- *         - name: parent
- *           description: select parent of category
- *           in: formData
- *           required: false
+ *      requestBody:
+ *          requried: true
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema: 
+ *                     $ref: "#/components/schemas/AddCategory"
  *      responses:   
  *          200:   
  *               description: success
@@ -25,12 +47,13 @@ const router = require("express").Router();
  *               description: not Found      
  */
 router.post("/add", CategoryController.addCategory);
+
 /**
  * @swagger
  * /admin/category/parents:
  *    get:
  *      summary:  parents
- *      description:  get all parents of category
+ *      description:  get all parent of category
  *      tags: [category(admin-panel)]
  *      responses:   
  *          200:   
@@ -48,11 +71,10 @@ router.get("/parents", CategoryController.getParents);
  *      description:  remove category by id 
  *      tags: [category(admin-panel)]
  *      parameters:
- *         - name: id
- *           description: id of category
- *           in: path
- *           type: string
- *           required: true
+ *         -   in: path
+ *             name: id
+ *             required: true
+ *             description: enter id to remove category
  *      responses:   
  *          200:   
  *               description: success
@@ -95,28 +117,29 @@ router.get("/list-of-all", CategoryController.getAllCategoryWithout);
 
 /**
  * @swagger
- * /admin/category/update/{id}:
+ * /admin/category/update-title/{id}:
  *    patch:
  *      summary: update category
  *      description:  update category by id 
  *      tags: [category(admin-panel)]
  *      parameters:
- *         - name: id
- *           description: id of category
- *           in: path
- *           type: string
- *           required: true
- *         - name: title
- *           description: title of category
- *           type: string
- *           in: formData
+ *         -   in: path
+ *             name: id
+ *             required: true
+ *             description: enter id to edit title
+ *      requestBody:
+ *          requried: true
+ *          content:
+ *              application/x-www-form-urlencoded:
+ *                  schema: 
+ *                     $ref: "#/components/schemas/EditCategoryTitle"
  *      responses:   
  *          200:   
  *               description: success
  *          404:
  *               description: not Found      
  */
-router.patch("/update/:id", CategoryController.editCategoryTitle);
+router.patch("/update-title/:id", CategoryController.editCategoryTitle);
 
 
 /**
@@ -127,11 +150,10 @@ router.patch("/update/:id", CategoryController.editCategoryTitle);
  *      description:  get category by object-id
  *      tags: [category(admin-panel)]
  *      parameters:
- *         - name: id
- *           description: id of category
- *           in: path
- *           type: string
- *           required: true
+ *         -   in: path
+ *             name: id
+ *             required: true
+ *             description: enter id to find category
  *      responses:   
  *          200:   
  *               description: success
@@ -140,5 +162,5 @@ router.patch("/update/:id", CategoryController.editCategoryTitle);
  */
 router.get("/:id", CategoryController.getCategoryById);
 module.exports = {
-    CategoryRoutes: router
+    CategoryApiRouter: router
 }

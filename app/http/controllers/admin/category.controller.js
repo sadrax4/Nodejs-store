@@ -1,7 +1,7 @@
 const createHttpError = require("http-errors");
 const { CategoryModel } = require("../../../models/categories");
 const Controller = require("../controller");
-const { addCategorySchema, updateCategoryParentSchema, updateCategoryTitleSchema } = require("../../../validator/admin/caregory.schema");
+const { addCategorySchema, updateCategoryParentSchema, updateCategoryTitleSchema } = require("../../../validator/admin/category.schema");
 const mongoose = require("mongoose");
 const { validateAsync } = require("@hapi/joi/lib/base");
 

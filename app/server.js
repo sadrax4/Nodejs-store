@@ -11,7 +11,6 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const cors = require("cors");
 module.exports = class Application {
     #app = express();
-
     constructor(PORT, DB_URI) {
         this.configApplication();
         this.createServer(PORT);
@@ -27,29 +26,45 @@ module.exports = class Application {
         this.#app.use(bodyParser.json());
         this.#app.use(morgan("dev"))
         this.#app.use(express.json());
-        this.#app.use(express.urlencoded({ extended: false }));
+        this.#app.use(express.urlencoded({ extended: true }));
         this.#app.use(express.static(path.join(__dirname, "..", "public")));
-        this.#app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc({
-            swaggerDefinition: {
-                info: {
-                    title: "X4 store",
-                    version: "1.0.0",
-                    description: "بزرگترین فروشگاه ایکس فور ها",
-                    contact: {
-                        name: "Sadra soleimani",
-                        email: "sadrasadrasadra6@gmail.com",
-                        phone: "09162844007",
-                        url: "http://github.com/sadrax4"
-                    }
-                },
-                servers: [
-                    {
-                        url: "http://localhost:3000"
-                    }
-                ]
-            },
-            apis: ["./app/router/**/*.js"]
-        })))
+        this.#app.use("/api-docs",
+            swaggerUI.serve,
+            swaggerUI.setup(
+                swaggerJsDoc({
+                    swaggerDefinition: {
+                        openapi: "3.0.0",
+                        info: {
+                            title: "X4 store",
+                            version: "1.0.0",
+                            description: "بزرگترین فروشگاه ایکس فور ها",
+                            contact: {
+                                name: "Sadra soleimani",
+                                email: "sadrasadrasadra6@gmail.com",
+                                phone: "09162844007",
+                                url: "http://github.com/sadrax4"
+                            }
+                        },
+                        servers: [
+                            {
+                                url: "http://localhost:3000"
+                            }
+                        ],
+                        components: {
+                            securitySchemes: {
+                                BearerAuth: {
+                                    type: "http",
+                                    scheme: "bearer",
+                                    bearerFormat: "JWT"
+                                }
+                            }
+                        },
+                        security: [{ BearerAuth: [] }]
+                    },
+                    apis: ["./app/router/**/*.js"]
+                }), { explorer: true }
+            )
+        )
     }
     createServer(PORT) {
         const http = require("http");
@@ -69,7 +84,7 @@ module.exports = class Application {
             process.exit(0);
         })
     }
-    init_redis(){
+    init_redis() {
         require("./utils/init_redis");
     }
     createRoutes() {

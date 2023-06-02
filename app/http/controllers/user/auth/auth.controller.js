@@ -47,7 +47,7 @@ class AuthController extends Controller {
             if (!user) throw createHttpError.NotFound("کاربری با این شماره  موبایل یافت نشد");
             if (user.otp.code != code) throw createHttpError.Unauthorized("کد وارد شده صحیح نمیباشد");
             const now = Date.now();
-            if (+user.otp.expiresIn < now) throw createHttpError.Unauthorized("کد شما منقضی شده است");
+            if (+user.otp.expiresIn <= now) throw createHttpError.Unauthorized("کد شما منقضی شده است");
             const accessToken = await signTokenGenerator(user._id);
             const refreshToken = await signRefreshTokenGenerator(user._id);
             return res.json({

@@ -3,7 +3,7 @@ const { default: mongoose } = require("mongoose");
 const Schema = new mongoose.Schema({
     first_name: { type: String },
     last_name: { type: String },
-    username: { type: String,  lowercase: true },
+    username: { type: String, lowercase: true },
     mobile: { type: String, required: true },
     email: { type: String, lowercase: true },
     password: { type: String },
@@ -16,7 +16,8 @@ const Schema = new mongoose.Schema({
     bills: { type: [], default: [] },
     discount: { type: Number, default: 0 },
     birthday: { type: String },
-    roles: { type: [String], default: ["USER"] }
+    roles: { type: [String], default: ["USER"] },
+    courses: { type: [mongoose.Types.ObjectId], default: [] }
 })
 module.exports = {
     UserModel: mongoose.model("user", Schema)

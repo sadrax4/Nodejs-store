@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@prisma/client": "^4.14.1",
     "auto-bind": "^4.0.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
@@ -24,9 +25,13 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "random-int": "^3.0.0",
     "redis": "^4.6.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2"
+  },
+  "devDependencies": {
+    "prisma": "^4.14.1"
   }
 }

@@ -3,9 +3,10 @@ const { UserModel } = require("../models/users");
 const { SECRET_KEY, REFRESH_TOKEN } = require("./constans");
 const createHttpError = require("http-errors");
 const redisClient = require("./init_redis");
-
-  function randomNumberGenerator(length) {
-    return  Math.floor(Math.random() * 100000);
+const path = require("path");
+const fs = require("fs");
+function randomNumberGenerator(length) {
+    return Math.floor(Math.random() * 100000);
 }
 function signTokenGenerator(userID) {
     return new Promise(async (resolve, reject) => {
@@ -51,9 +52,27 @@ async function verifyRefreshToken(token) {
         })
     })
 }
+
+async function deleteFileInPublic(fileAddress) {
+    if (fileAddress) {
+        const filePath = path.join(__dirname, "..", "..", fileAddress);
+        if (fs.existsSync(filePath)) await fs.unlinkSync(filePath);
+    }
+}
+
+function listOfImageFromRequest(files, fileUploadPath) {
+    if (files?.length > 0) {
+        return files.map(file =>  path.join(fileUploadPath, file.filename));
+    } else {
+        return [];
+    }
+}
+
 module.exports = {
     randomNumberGenerator,
     signTokenGenerator,
     verifyRefreshToken,
-    signRefreshTokenGenerator
+    signRefreshTokenGenerator,
+    deleteFileInPublic,
+    listOfImageFromRequest
 }
