@@ -21,6 +21,7 @@ function autoPopulate(next) {
     next();
 }
 Schema.pre("findOne", autoPopulate).pre("find", autoPopulate)
+
 module.exports = {
     CategoryModel: mongoose.model("category", Schema)
 }

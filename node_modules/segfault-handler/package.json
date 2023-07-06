@@ -1,0 +1,24 @@
+{
+  "name": "segfault-handler",
+  "description": "catches SIGSEGV and prints diagnostic information",
+  "version": "1.3.0",
+  "author": "Kenneth Geisshirt <geisshirt@gmail.com>",
+  "contributors": [
+    "Dave Dopson <ddopson@gmail.com>",
+    "Mark Smith <msmith@rallydev.com>",
+    "David Swift <dswift@pccowboy.com>",
+    "Anton Whalley <anton@venshare.com>",
+    "Kenneth Geisshirt <geisshirt@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ddopson/node-segfault-handler.git"
+  },
+  "dependencies": {
+    "bindings": "^1.2.1",
+    "nan": "^2.14.0"
+  },
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "BSD-3-Clause"
+}

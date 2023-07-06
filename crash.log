@@ -1,0 +1,8 @@
+PID 30955 received SIGSEGV for address: 0x1
+/home/sadra/myNodeJsCode/store-project/node_modules/segfault-handler/build/Release/segfault-handler.node(+0x372d)[0x7f9ff2ec672d]
+/lib/x86_64-linux-gnu/libc.so.6(+0x42520)[0x7f9ff2842520]
+/home/sadra/myNodeJsCode/store-project/node_modules/segfault-handler/build/Release/segfault-handler.node(_Z22segfault_stack_frame_1v+0x28)[0x7f9ff2ec67c8]
+/home/sadra/myNodeJsCode/store-project/node_modules/segfault-handler/build/Release/segfault-handler.node(+0x2a7f)[0x7f9ff2ec5a7f]
+/usr/local/bin/node[0xda5fa0]
+/usr/local/bin/node(_ZN2v88internal21Builtin_HandleApiCallEiPmPNS0_7IsolateE+0xaf)[0xda74df]
+/usr/local/bin/node[0x16e9af9]

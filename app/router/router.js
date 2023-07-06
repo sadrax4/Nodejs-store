@@ -9,7 +9,7 @@ const { blogApiPrisma } = require("./prisma-api/blog.api");
 const { verifyToken, checkRole } = require("../middlewares/verifyToken");
 const router = express.Router();
 
-router.use("/admin", verifyToken, checkRole("ADMIN"), adminRoutes)
+router.use("/admin", verifyToken, /*checkRole("ADMIN"),*/ adminRoutes)
 router.use("/developer", developerRoutes);
 router.use("/blogs", blogApiPrisma)
 router.use("/category", CategoryApiPrisma)

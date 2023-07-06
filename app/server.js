@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const cors = require("cors");
+
 module.exports = class Application {
     #app = express();
     constructor(PORT, DB_URI) {
@@ -33,7 +34,7 @@ module.exports = class Application {
             swaggerUI.setup(
                 swaggerJsDoc({
                     swaggerDefinition: {
-                        openapi: "3.0.0",
+                        openapi: "3.0.1",
                         info: {
                             title: "X4 store",
                             version: "1.0.0",

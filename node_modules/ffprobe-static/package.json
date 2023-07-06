@@ -1,0 +1,22 @@
+{
+  "name": "ffprobe-static",
+  "version": "3.1.0",
+  "description": "Static binaries for ffprobe.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape tests/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshwnj/ffprobe-static.git"
+  },
+  "keywords": [
+    "ffprobe",
+    "ffmpeg"
+  ],
+  "author": "joshwnj",
+  "license": "MIT",
+  "devDependencies": {
+    "tape": "^4.0.1"
+  }
+}

@@ -14,6 +14,7 @@ const router = require('express').Router();
  *                    mobile:
  *                      type: string
  *                      description: get user mobile for sign and signup
+ *                      example: "09162844007"
  *          CheckOTP:
  *               type: object
  *               required: 
@@ -23,6 +24,7 @@ const router = require('express').Router();
  *                    mobile:
  *                      type: string
  *                      description: get user mobile for sign and signup
+ *                      example: "09162844007"
  *                    code:
  *                      type: integer
  *                      description: recieved code from getOTP

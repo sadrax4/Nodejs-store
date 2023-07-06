@@ -25,6 +25,7 @@ const storage = multer.diskStorage({
         cb(null, fileName);
     }
 })
+
 function fileFilter(req, file, cb) {
     const ext = path.extname(file.originalname) || "";
     const allowExt = [".png", ".jpg", ".jpeg", ".gif", ".webp"];
@@ -33,7 +34,23 @@ function fileFilter(req, file, cb) {
     }
     return cb(createHttpError.BadRequest("فرمت تصویر اشتباه است"));
 }
-const maxSize = (parseInt(process.env.MAX_SIZE_OF_FILE) * 1000 * 1000);
-const uploadFile = multer({ storage, fileFilter, limits: { fileSize: maxSize } });
 
-module.exports = uploadFile;
+function videoFileFilter(req, file, cb) {
+    const ext = path.extname(file.originalname) || "";
+    const allowExt = [".mp4", ".mp3", ".avi", ".mpg", ".mkv", ".mov"];
+    if (allowExt.includes(ext)) {
+        return cb(null, true);
+    }
+    return cb(createHttpError.BadRequest("فرمت ویدیو اشتباه است"));
+}
+
+const maxPictureSize = (parseInt(process.env.MAX_SIZE_OF_FILE) * 1000 * 1000);
+const uploadFile = multer({ storage, fileFilter, limits: { fileSize: maxPictureSize } });
+
+const maxVideoSize = (parseInt(process.env.MAX_SIZE_OF_VIDEO_FILE) * 1000 * 1000);
+const uploadVideoFile = multer({ storage, videoFileFilter, limits: { fileSize: maxVideoSize } });
+
+module.exports = {
+    uploadFile,
+    uploadVideoFile
+};

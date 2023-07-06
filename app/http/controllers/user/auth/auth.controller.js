@@ -36,7 +36,7 @@ class AuthController extends Controller {
         return !!(await UserModel.create({
             mobile,
             otp,
-            roles: USER_ROLE
+            roles: USER_ROLE[0]
         }))
     }
     async checkOtp(req, res, next) {
