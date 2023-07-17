@@ -9,8 +9,7 @@ const { USER_ROLE, EXPIRES_IN } = require("../../../../utils/constans");
 class AuthController extends Controller {
     async getOtp(req, res, next) {
         try {
-            await getOtpSchema.validateAsync(req.body);
-            const { mobile } = req.body;
+            const { mobile } =  await getOtpSchema.validateAsync(req.body);
             const code = randomNumberGenerator();
             const result = await this.saveUser(mobile, code);
             if (!result) throw createHttpError.Unauthorized("ورود شما انجام نشد")

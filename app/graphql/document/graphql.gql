@@ -1,0 +1,50 @@
+{
+  blog{
+    _id
+    title
+    imageURL
+    author {
+      first_name
+      last_name
+    }
+    category{
+      title
+      parent
+    }
+  }
+}
+///////////////////////////
+{
+  product{
+    _id
+		title
+		short_text
+		text
+		imagesURL
+		tags
+		category {
+		  _id
+		  title
+		  parent
+		}
+		price
+		discount
+		count
+		type
+		time
+		format
+		supplier {
+		  _id
+		  first_name
+		  last_name
+		}
+		feature {
+		  length
+		  height
+		  width
+		  weight
+		  madein
+		}
+  }
+}
+///////////////////////////

@@ -29,7 +29,6 @@ async function verifyToken(req, res, next) {
 }
 function checkRole(role) {
     try {
-        console.log(role, req.user.roles);
         return function (req, res, next) {
             if (req.user.roles.includes(role)) return next();
             throw createHttpError.Forbidden("سطح کاربری شما مجاز نمیباشد");
@@ -40,6 +39,5 @@ function checkRole(role) {
 }
 
 module.exports = {
-    verifyToken,
-    checkRole
+    verifyToken
 }

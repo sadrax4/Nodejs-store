@@ -46,7 +46,7 @@ async function verifyRefreshToken(token) {
             const { mobile } = payload || {};
             const user = await UserModel.findOne({ mobile }, { password: 0, otp: 0 });
             if (!user) reject(createHttpError.Unauthorized("حساب کاربری یافت نشد"));
-            const refreshToken = await redisClient.get(user._id.toString());
+            const refreshToken = await redisClient.get(user?._id.toString());
             if (token === refreshToken) return resolve(mobile);
             reject(createHttpError.Unauthorized("ورود به حساب کاربری انجام نشد"))
         })
@@ -56,7 +56,7 @@ async function verifyRefreshToken(token) {
 async function deleteFileInPublic(fileAddress) {
     if (fileAddress) {
         const filePath = path.join(__dirname, "..", "..", fileAddress);
-        if (fs.existsSync(filePath)) await fs.unlinkSync(filePath);
+        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     }
 }
 function listOfImageFromRequest(files, fileUploadPath) {
@@ -133,7 +133,6 @@ function getTimeOfChapter(chapters = []) {
             }
         }
     }
-    console.log(second);
     hour = Math.floor(second / 3600);         // convert seconds to hourt
     minute = Math.floor(second / 60) % 60;    // convert seconds to minutes
     second = Math.floor(second % 60);         // convert seconds to second

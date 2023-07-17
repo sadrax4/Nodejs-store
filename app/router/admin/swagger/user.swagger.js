@@ -102,6 +102,23 @@
  *          404:
  *               description: not Found      
  */
+/**
+ * @swagger
+ * /admin/user/profile:
+ *    get:
+ *      summary: get profile
+ *      description: get list of all user
+ *      tags: [user(admin-panel)]     
+ *      responses:   
+ *          200:   
+ *               description: success
+ *               content:
+ *                   application/json:
+ *                      schema:
+ *                          $ref: "#/definitions/listOfUsers"
+ *          404:
+ *               description: not Found      
+ */
 
 /**
  * @swagger

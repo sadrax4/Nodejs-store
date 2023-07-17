@@ -26,8 +26,8 @@ class UserController extends Controller {
             if (updateResult.modifiedCount == 0) throw createHttpError.InternalServerError("خطا سروری");
             return res.status(StatusCodes.OK).json({
                 status: StatusCodes.OK,
-                data:{
-                    message:"به روز رسانی با موفقیت انجام شد"
+                data: {
+                    message: "به روز رسانی با موفقیت انجام شد"
                 }
             })
         } catch (error) {
@@ -55,6 +55,19 @@ class UserController extends Controller {
             databaseQuery["$text"] = { $search: search }
             const user = await UserModel.find(databaseQuery);
             if (!user) throw createHttpError.NotFound("کاربری یافت نشد");
+            return res.status(StatusCodes.OK).json({
+                statusCode: StatusCodes.OK,
+                data: {
+                    user
+                }
+            })
+        } catch (error) {
+            next(error);
+        }
+    }
+    async userProfile(req, res, next) {
+        try {
+            const user = req.user;
             return res.status(StatusCodes.OK).json({
                 statusCode: StatusCodes.OK,
                 data: {

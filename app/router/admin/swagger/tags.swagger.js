@@ -4,6 +4,9 @@
  *  -   name: user(admin-panel)
  *      description: manage user
  * 
+ *  -   name: role(admin-panel)
+ *      description:  roleBaseAccessControll and manage role
+ * 
  *  -   name: product(admin-panel)
  *      description: manage product
  * 
