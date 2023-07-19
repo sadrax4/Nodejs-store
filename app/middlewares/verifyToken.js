@@ -27,17 +27,19 @@ async function verifyToken(req, res, next) {
         next(error);
     }
 }
-function checkRole(role) {
+async function verifyTokenInGraphQl(req) {
     try {
-        return function (req, res, next) {
-            if (req.user.roles.includes(role)) return next();
-            throw createHttpError.Forbidden("سطح کاربری شما مجاز نمیباشد");
-        }
-    } catch (error) {
-        next(error);
+        const token = getToken(req.headers);
+        const { mobile } = jwt.verify(token, SECRET_KEY)
+        const user = await UserModel.findOne({ mobile }, { password: 0, otp: 0 });
+        if (!user) throw new createHttpError.Unauthorized("حساب کاربری یافت نشد");
+        return user;
+    }
+    catch (error) {
+        throw new createHttpError.Unauthorized(error.message);
     }
 }
-
 module.exports = {
-    verifyToken
+    verifyToken,
+    verifyTokenInGraphQl
 }

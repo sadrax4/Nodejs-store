@@ -13,6 +13,7 @@ const categoriesResolver = {
 const childOfCategoryResolver = {
     type: new GraphQLList(categoriesType),
     args: {
+        _id: { type: GraphQLString },
         parent: { type: GraphQLString }
     },
     resolve: async (_, args) => {
