@@ -10,7 +10,7 @@ const ProductSchema = new mongoose.Schema({
     category: { type: mongoose.Types.ObjectId, ref: "category", required: true },
     comments: { type: [commentSchema], required: true },
     likes: { type: [mongoose.Types.ObjectId], ref: "user", required: true },
-    deslikes: { type: [mongoose.Types.ObjectId], ref: "user", required: true },
+    dislikes: { type: [mongoose.Types.ObjectId], ref: "user", required: true },
     bookmarks: { type: [mongoose.Types.ObjectId], ref: "user", default: [] },
     price: { type: Number, default: 0, required: true },
     discount: { type: Number, default: 0 },

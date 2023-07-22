@@ -41,7 +41,10 @@ const coursesType = new GraphQLObjectType({
         teacher: { type: new GraphQLList(authorType) },
         chapters: { type: new GraphQLList(chapterType) },
         totalTime: { type: GraphQLString },
-        comments: {type:  commentType }
+        comments: {type:  new GraphQLList(commentType) },
+        likes: { type: new GraphQLList(authorType) },
+        dislikes: { type: new GraphQLList(authorType) },
+        bookmarks: { type: new GraphQLList(authorType) }
     }
 })
 module.exports = {

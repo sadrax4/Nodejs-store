@@ -13,7 +13,10 @@ const blogType = new GraphQLObjectType({
         imageURL: { type: GraphQLString },
         tags: { type: new GraphQLList(GraphQLString) },
         category: { type: new GraphQLList(categoryType) },
-        comments: {type:  commentType }
+        comments: { type: new GraphQLList(commentType) },
+        likes: { type: new GraphQLList(authorType) },
+        dislikes: { type: new GraphQLList(authorType) },
+        bookmarks: { type: new GraphQLList(authorType) }
     }
 })
 module.exports = {

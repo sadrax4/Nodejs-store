@@ -7,13 +7,14 @@ const { StatusCodes } = require("http-status-codes");
 const { responseType } = require("../typeDefs/public.types");
 const { verifyTokenInGraphQl } = require("../../middlewares/verifyToken");
 const { default: mongoose } = require("mongoose");
-const { copyObject } = require("../../utils/function");
+const { checkExistBlog, checkExistProduct, checkExistCourse, getComment } = require("../utils");
+
 const DATABASEFIELDS = {
     BlogModel,
     ProductModel,
     CoursesModel
 }
-const createCommentForBlog = {
+const createCommentForBlogResolver = {
     type: responseType,
     args: {
         comment: { type: GraphQLString },
@@ -27,7 +28,7 @@ const createCommentForBlog = {
         if (!mongoose.isValidObjectId(blogID)) {
             throw createHttpError.BadGateway("شناسه بلاگ ارسال شده صحیح نمیباشد")
         }
-        await checkExistField(DATABASEFIELDS.BlogModel, blogID)
+        await checkExistBlog(blogID)
         if (parent && mongoose.isValidObjectId(parent)) {
             const commentDocument = await getComment(DATABASEFIELDS.BlogModel, parent)
             if (commentDocument && !commentDocument?.openToComment) {
@@ -74,7 +75,7 @@ const createCommentForBlog = {
         }
     }
 }
-const createCommentForProduct = {
+const createCommentForProductResolver = {
     type: responseType,
     args: {
         comment: { type: GraphQLString },
@@ -88,7 +89,7 @@ const createCommentForProduct = {
         if (!mongoose.isValidObjectId(productID)) {
             throw createHttpError.BadGateway("شناسه محصول ارسال شده صحیح نمیباشد");
         }
-        await checkExistField(ProductModel, productID)
+        await checkExistProduct(productID)
         if (parent && mongoose.isValidObjectId(parent)) {
             const commentDocument = await getComment(ProductModel, parent)
             if (commentDocument && !commentDocument?.openToComment) {
@@ -136,7 +137,7 @@ const createCommentForProduct = {
         }
     }
 }
-const createCommentForCourse = {
+const createCommentForCourseResolver = {
     type: responseType,
     args: {
         comment: { type: GraphQLString },
@@ -150,13 +151,13 @@ const createCommentForCourse = {
         if (!mongoose.isValidObjectId(courseID)) {
             throw createHttpError.BadGateway("شناسه دوره ارسال شده صحیح نمیباشد")
         }
-        await checkExistField(DATABASEFIELDS.CourseModel, courseID)
+        await checkExistCourse(courseID)
         if (parent && mongoose.isValidObjectId(parent)) {
-            const commentDocument = await getComment(DATABASEFIELDS.CourseModel, parent)
+            const commentDocument = await getComment(DATABASEFIELDS.CoursesModel, parent)
             if (commentDocument && !commentDocument?.openToComment) {
                 throw createHttpError.BadRequest("ثبت پاسخ مجاز نیست")
             }
-            const createAnswerResult = await DATABASEFIELDS.CourseModel.updateOne({
+            const createAnswerResult = await DATABASEFIELDS.CoursesModel.updateOne({
                 "comments._id": parent
             }, {
                 $push: {
@@ -197,18 +198,8 @@ const createCommentForCourse = {
         }
     }
 }
-async function checkExistField(model, blogID) {
-    const value = await model.find({ _id: blogID });
-    if (!value) throw createHttpError.NotFound("sd");
-    return value;
-}
-async function getComment(model, id){
-    const comment =  await model.findOne({"comments._id": id},  {"comments.$" : 1});
-    if(!comment?.comments?.[0]) throw createHttpError.NotFound("کامنتی با این مشخصات یافت نشد")
-    return comment?.comments?.[0]
-}
 module.exports = {
-    createCommentForBlog,
-    createCommentForCourse,
-    createCommentForProduct
+    createCommentForBlogResolver,
+    createCommentForCourseResolver,
+    createCommentForProductResolver
 }

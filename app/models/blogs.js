@@ -10,9 +10,9 @@ const BlogSchema = new mongoose.Schema({
     tags: { type: [String], default: [] },
     category: { type: [mongoose.Types.ObjectId], ref: "category", reqiured: true },
     comments: { type: [commentSchema], default: [] },
-    like: { type: [mongoose.Types.ObjectId], ref: "users", default: [] },
-    deslike: { type: [mongoose.Types.ObjectId], ref: "users", default: [] },
-    bookmark: { type: [mongoose.Types.ObjectId], ref: "users", default: [] }
+    likes: { type: [mongoose.Types.ObjectId], ref: "users", default: [] },
+    dislikes: { type: [mongoose.Types.ObjectId], ref: "users", default: [] },
+    bookmarks: { type: [mongoose.Types.ObjectId], ref: "users", default: [] }
 }
 );
 BlogSchema.set('toObject', { virtuals: true })

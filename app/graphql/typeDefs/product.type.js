@@ -32,7 +32,10 @@ const productType = new GraphQLObjectType({
         format: { type: GraphQLString },
         supplier: { type: new GraphQLList(authorType) },
         feature: { type: feature },
-        comments: { type: new GraphQLList(commentType) }
+        comments: { type: new GraphQLList(commentType) },
+        likes: { type: new GraphQLList(authorType) },
+        dislikes: { type: new GraphQLList(authorType) },
+        bookmarks: { type: new GraphQLList(authorType) }
     }
 })
 module.exports = {

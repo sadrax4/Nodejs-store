@@ -1,6 +1,20 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, model } = require("mongoose");
+
+const ProductSchema = new mongoose.Schema({
+    productID: { type: mongoose.Types.ObjectId, ref: "product" },
+    count: { type: Number, default: 1 }
+})
+const CourseSchema = new mongoose.Schema({
+    courseID: { type: mongoose.Types.ObjectId, ref: "course" },
+    count: { type: Number, default: 1 }
+})
+const BasketSchema = new mongoose.Schema({
+    courses: { type: [CourseSchema], default: [] },
+    products: { type: [ProductSchema], default: [] },
+})
 
 const UserSchema = new mongoose.Schema({
+    basket: { type: BasketSchema, default: {} },
     first_name: { type: String },
     last_name: { type: String },
     username: { type: String, lowercase: true },
@@ -17,18 +31,19 @@ const UserSchema = new mongoose.Schema({
     discount: { type: Number, default: 0 },
     birthday: { type: String },
     role: { type: String, default: "USER" },
-    courses: { type: [mongoose.Types.ObjectId], default: [] }
+    courses: { type: [mongoose.Types.ObjectId], default: [] },
 }, {
-    toJSON: {
-        virtuals: true
-    }
+    toJSON: { virtuals: true }, toObject: { virtuals: true }
 })
+// UserSchema.add({ basket: { type: basketSchema, default: 1 } })
+
 UserSchema.index({
     first_name: "text",
     last_name: "text",
     username: "text",
     email: "text",
-    mobile: "text"
+    mobile: "text",
+    baskets: "text"
 })
 module.exports = {
     UserModel: mongoose.model("user", UserSchema)
