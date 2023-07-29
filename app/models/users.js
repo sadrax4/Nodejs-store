@@ -32,10 +32,10 @@ const UserSchema = new mongoose.Schema({
     birthday: { type: String },
     role: { type: String, default: "USER" },
     courses: { type: [mongoose.Types.ObjectId], default: [] },
+    products: { type: [mongoose.Types.ObjectId], default: [] }
 }, {
     toJSON: { virtuals: true }, toObject: { virtuals: true }
 })
-// UserSchema.add({ basket: { type: basketSchema, default: 1 } })
 
 UserSchema.index({
     first_name: "text",

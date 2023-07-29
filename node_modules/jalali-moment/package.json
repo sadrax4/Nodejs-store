@@ -1,0 +1,63 @@
+{
+  "name": "jalali-moment",
+  "version": "3.3.11",
+  "description": "Manipulate and convert Jalali and Gregorian date easily",
+  "author": {
+    "name": "Mojtaba Zarei (Fingerpich)",
+    "email": "zarei.bs@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "manipulate",
+    "validate",
+    "jalali",
+    "convert",
+    "miladi",
+    "shamsi",
+    "typescript",
+    "javascript",
+    "persian",
+    "khorshidi",
+    "date",
+    "time",
+    "calendar"
+  ],
+  "main": "jalali-moment.js",
+  "scripts": {
+    "report-coverage": "export CODACY_PROJECT_TOKEN=7f46b99d0c1e4e0e9f176d98d70f972c; istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage",
+    "test": "mocha --reporter spec --ui bdd --colors --check-leaks  test.js",
+    "build": "webpack --config webpack.browser.js",
+    "dev": "webpack --progress --colors --watch",
+    "make-npm-pack": "mkdir -p pkg;cp * ./pkg;cp -r node_modules/ ./pkg/node_modules; cp npmdoc.md ./pkg/README.md; cd ./pkg;npm run build",
+    "publish-npm-pack": "npm publish pkg;rm -rf pkg",
+    "lint": "eslint jalali-moment.js && eslint test.js"
+  },
+  "homepage": "https://github.com/fingerpich/jalali-moment",
+  "bugs": {
+    "url": "https://github.com/fingerpich/jalali-moment/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fingerpich/jalali-moment.git"
+  },
+  "bin": {
+    "jalalim": "./cli.js"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "codacy-coverage": "^3.4.0",
+    "eslint": "^7.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^8.0.1",
+    "mocha-lcov-reporter": "^1.3.0",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^5.15.0",
+    "webpack-cli": "^4.3.1"
+  },
+  "dependencies": {
+    "commander": "^7.0.0",
+    "inquirer": "^8.0.0",
+    "moment": "^2.26.0"
+  },
+  "typings": "./jalali-moment.d.ts"
+}

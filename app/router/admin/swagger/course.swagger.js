@@ -5,7 +5,7 @@
  *          Types:
  *              type: string
  *              enum:
- *                  - free
+ *                  - lock
  *                  - cash
  *                  - special    
  *          AddCourse:

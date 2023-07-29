@@ -58,13 +58,13 @@ const addCourseToBasketResolver = {
         const user = await verifyTokenInGraphQl(req);
         const { courseID } = args;
         await checkExistCourse(courseID);
+        const userCourse = await UserModel.findOne({ _id: user._id, courses: courseID });
+        if (userCourse) {
+            throw createHttpError.BadRequest("دوره قبلا   خریداری شده است");
+        }
         const course = await findCourseInBasket(user._id, courseID);
         if (course) {
-            await UserModel.updateOne(
-                { _id: user._id, "basket.courses.courseID": courseID },
-                {
-                    $inc: { "basket.courses.$.count": 1 }
-                })
+            throw createHttpError.BadRequest("دوره قبلا به سبد خرید اضاقه شده است")
         } else {
             const updateResult = await UserModel.updateOne(
                 { _id: user._id },
@@ -160,7 +160,7 @@ const removeProductInBasketResolver = {
         return {
             statusCode: StatusCodes.CREATED,
             data: {
-                message: "محصول بلا موفقیت از سید خرید حذف شد"
+                message: "محصول با موفقیت از سید خرید حذف شد"
             }
         }
     }

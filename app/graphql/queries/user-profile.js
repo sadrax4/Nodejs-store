@@ -1,14 +1,15 @@
 const { GraphQLList, GraphQLString } = require("graphql");
-const { copyObject } = require("../../utils/function");
+const { copyObject, getBasketOfUser } = require("../../utils/function");
 const { CoursesModel } = require("../../models/course");
 const { coursesType } = require("../typeDefs/courses.type");
-const { authorType } = require("../typeDefs/public.types");
+const { authorType, AnyType } = require("../typeDefs/public.types");
 const { productType } = require("../typeDefs/product.type");
 const { ProductModel } = require("../../models/products");
 const createHttpError = require("http-errors");
 const { blogType } = require("../typeDefs/blog.type");
 const { BlogModel } = require("../../models/blogs");
 const { verifyTokenInGraphQl } = require("../../middlewares/verifyToken");
+const { UserModel } = require("../../models/users");
 
 const getUserProductBookmarkedResolver = {
     type: new GraphQLList(productType),
@@ -64,8 +65,17 @@ const getUserBlogBookmarkedResolver = {
         return bookmarkedBlog;
     }
 }
+const getUserBasketResolver = {
+    type: AnyType,
+    resolve: async (_, args, context) => {
+        const { req } = context;
+        const user = await verifyTokenInGraphQl(req);
+        return await getBasketOfUser(user._id);
+    }
+}
 module.exports = {
     getUserProductBookmarkedResolver,
     getUserCourseBookmarkedResolver,
-    getUserBlogBookmarkedResolver
+    getUserBlogBookmarkedResolver,
+    getUserBasketResolver
 }

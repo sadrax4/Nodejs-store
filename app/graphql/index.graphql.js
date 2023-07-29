@@ -30,7 +30,8 @@ const {
 const {
     getUserProductBookmarkedResolver,
     getUserCourseBookmarkedResolver,
-    getUserBlogBookmarkedResolver
+    getUserBlogBookmarkedResolver,
+    getUserBasketResolver
 } = require("./queries/user-profile");
 const {
     addProductToBasketResolver,
@@ -50,7 +51,8 @@ const RootQuery = new GraphQLObjectType({
         categoryChild: childOfCategoryResolver,
         userProductBookmarked: getUserProductBookmarkedResolver,
         userCourseBookmarked: getUserCourseBookmarkedResolver,
-        userBlogBookmarked: getUserBlogBookmarkedResolver
+        userBlogBookmarked: getUserBlogBookmarkedResolver,
+        userBasket: getUserBasketResolver
     }
 })
 const RootMutation = new GraphQLObjectType({

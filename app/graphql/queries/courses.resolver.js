@@ -1,5 +1,4 @@
 const { GraphQLList, GraphQLString } = require("graphql");
-const { productType } = require("../typeDefs/product.type");
 const { copyObject } = require("../../utils/function");
 const { CoursesModel } = require("../../models/course");
 const { coursesType } = require("../typeDefs/courses.type");

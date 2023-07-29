@@ -8,8 +8,8 @@ const createCourseSchema = Joi.object({
     price: Joi.number().error(createError.BadRequest("قیمت وارد شده صحیح نمیباشد")),
     discount: Joi.number().error(createError.BadRequest("تخفیف وارد شده صحیح نمیباشد")),
     tags: Joi.array().min(0).max(20).error(createError.BadRequest("برچسب ها نمیتواند بیشتر از 20 ایتم باشد")),
-    category: Joi.string().pattern(MongoIDPattern).error(createError.BadRequest("دسته بندی مورد نظر یافت نشد")),
-    type: Joi.string().pattern(/(free|cash|special)/).error(createError.BadRequest("دسته بندی مورد نظر یافت نشد")),
+    category: Joi.string().regex(MongoIDPattern).error(createError.BadRequest("دسته بندی مورد نظر یافت نشد")),
+    type: Joi.string().pattern(/(unlock|lock)/).error(createError.BadRequest("تگ  مورد نظر یافت نشد")),
     filename: Joi.string().pattern(/(\.png|\.jpg|\.webp|\.jpeg|\.gif)$/).error(createError.BadRequest("تصویر وارد شده صحیح نمیباشد")),
     fileUploadPath: Joi.allow()
 });

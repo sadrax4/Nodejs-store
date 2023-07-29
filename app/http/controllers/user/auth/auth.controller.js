@@ -10,7 +10,7 @@ class AuthController extends Controller {
     async getOtp(req, res, next) {
         try {
             const { mobile } =  await getOtpSchema.validateAsync(req.body);
-            const code = randomNumberGenerator();
+            const code = randomNumberGenerator(5);
             const result = await this.saveUser(mobile, code);
             if (!result) throw createHttpError.Unauthorized("ورود شما انجام نشد")
             return res.status(200).send({

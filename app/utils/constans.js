@@ -1,5 +1,5 @@
 module.exports = {
-    MongoIDPattern: /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i,
+    MongoIDPattern: /^[0-9a-fA-F]{24}$/,
     EXPIRES_IN: (new Date().getTime() + 1200000),
     USER_ROLE: [
         "USER",
