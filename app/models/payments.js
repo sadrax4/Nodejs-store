@@ -14,7 +14,9 @@ const PaymentSchema = new mongoose.Schema({
     cardPan: { type: String, default: undefined },
     paymentDate: { type: String, defualt: undefined }
 }, { timestamps: true });
+
 PaymentSchema.index({ authority: 'text', invoiceNumber: 'text', user: 'text', refID: 'text' });
+
 module.exports = {
     PaymentModel: mongoose.model("Payment", PaymentSchema)
 }

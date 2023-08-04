@@ -1,5 +1,6 @@
 module.exports = {
     MongoIDPattern: /^[0-9a-fA-F]{24}$/,
+    ImagePattern: /(\.png|\.jpg|\.webp|\.jpeg|\.gif)$/,
     EXPIRES_IN: (new Date().getTime() + 1200000),
     USER_ROLE: [
         "USER",

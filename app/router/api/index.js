@@ -27,5 +27,5 @@ const { verifyToken } = require("../../middlewares/verifyToken");
  */
 router.get("/", verifyToken, homeController.indexPage);
 module.exports = {
-    homeRoutes: router
+    homeRouter: router
 }

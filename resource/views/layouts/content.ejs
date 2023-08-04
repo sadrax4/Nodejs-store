@@ -1,0 +1,38 @@
+<div class="content">
+    <div class="contact-profile">
+        <img src="http://emilcarlsson.se/assets/harveyspecter.png"
+            alt="" />
+        <input type="hidden" id="userID">
+                    <div class="social-media">
+                        <span id="onlinesCount"><strong>افراد آنلاین : </strong><span id="onlineCount">-</span></span>
+                    </div>
+    </div>
+    <div id="roomName">
+        <h3></h3>
+    </div>
+    <div class="messages pb-5">
+        <ul style="padding-bottom: 50px;">
+            <li class="sent">
+                <img src="http://emilcarlsson.se/assets/harveyspecter.png"
+                    alt="" />
+                <p>salam dostan haleton chetore ? az course nodejs razi hastin?</p>
+            </li>
+            <li class="replies">
+                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                <p>salam are babab khialet rahat</p>
+            </li>
+        </ul>
+    </div>
+    <div class="message-input">
+        <div class="wrap">
+            <input type="text" id="messageInput" placeholder="Write your message..." />
+            <input type="file" onchange="sendFile(this.files)"/>
+            <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+            <div>
+                <button class="submit">send</i></button>
+                <button class="location" onclick="getLocation()">location</i></button>
+            </div>
+
+        </div>
+    </div>
+</div>

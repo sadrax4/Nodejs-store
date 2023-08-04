@@ -1,3 +1,9 @@
 /public
 /package.json
 /.env
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
+/package-lock.json
+/text.text\

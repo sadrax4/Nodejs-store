@@ -2,14 +2,13 @@ const jwt = require("jsonwebtoken");
 const { UserModel } = require("../models/users");
 const { SECRET_KEY, REFRESH_TOKEN } = require("./constans");
 const createHttpError = require("http-errors");
-const redisClient = require("./init_redis");
+const redisClient = require("./initRedis");
 const path = require("path");
 const fs = require("fs");
 const moment = require("jalali-moment");
 function randomNumberGenerator(length) {
     let lenghString = '1';
     for (let i = 0; i < length; i++) {
-
         lenghString = lenghString + '0';
     }
     return Math.floor(Math.random() * Number(lenghString));
@@ -242,6 +241,9 @@ async function getBasketOfUser(userID) {
 const getPersianDate = () => {
     return moment().locale('fa').format('YYYY/M/D');
 }
+const removeWithSpace = (str) => {
+    return (str = str.replace(/\s/g, ''));
+}
 module.exports = {
     randomNumberGenerator,
     signTokenGenerator,
@@ -255,5 +257,6 @@ module.exports = {
     getTime,
     getTimeOfChapter,
     getBasketOfUser,
-    getPersianDate
+    getPersianDate,
+    removeWithSpace
 }

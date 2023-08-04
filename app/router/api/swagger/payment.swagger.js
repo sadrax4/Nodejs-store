@@ -73,3 +73,20 @@
  *          404:
  *               description: not Found      
  */
+/**
+ * @swagger
+ * /total-income:
+ *    get:
+ *      summary: income
+ *      description: get total  income
+ *      tags: [payment-and-basket]
+ *      responses:   
+ *          200:   
+ *               description: success
+ *               content:
+ *                   application/json:
+ *                      schema:
+ *                          $ref: "#/definitions/publicMessage"
+ *          404:
+ *               description: not Found      
+ */

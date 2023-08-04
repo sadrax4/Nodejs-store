@@ -119,7 +119,32 @@ class PaymentController extends Controller {
             deleteInvalidValue(searchQuery);
             copyObject(searchQuery);
             const transactions = await PaymentModel.find(searchQuery);
-            return res.json(transactions)
+            return res.statusCode(StatusCodes.OK).json({
+                data: {
+                    transactions
+                }
+            })
+        } catch (error) {
+            next(error);
+        }
+    }
+    async totalIncome(req, res, next) {
+        try {
+            const totalIncome = (await PaymentModel.aggregate([
+                { $match: { verify: true } },
+                {
+                    $group: {
+                        _id: null,
+                        totalIncome: { $sum: "$amount" }
+                    }
+                },
+                { $project: { _id: 0 } },
+            ]))[0];
+            return res.statusCode(StatusCodes.OK).json({
+                data: {
+                    totalIncome
+                }
+            })
         } catch (error) {
             next(error);
         }

@@ -2,9 +2,11 @@ const { PaymentController } = require("../../http/controllers/api/payment.contro
 const { verifyToken } = require("../../middlewares/verifyToken");
 const route = require("express").Router();
 
-route.post("/payment", verifyToken, PaymentController.paymentGateway);
 route.get("/verify", PaymentController.verifyPayment);
+route.get("/total-income", PaymentController.totalIncome);
 route.post("/transaction-list", PaymentController.listOfTransaction);
+route.post("/payment", verifyToken, PaymentController.paymentGateway);
+
 
 
 module.exports = {

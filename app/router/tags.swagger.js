@@ -6,6 +6,8 @@
  * 
  *  -   name: user-authenticated
  *      description: user authenticated
+ *  -   name: support
+ *      description: support of store
  * 
  *  -   name: user(admin-panel)
  *      description: manage user

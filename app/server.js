@@ -9,6 +9,10 @@ const bodyParser = require("body-parser");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const cors = require("cors");
+const ejs = require("ejs");
+const ExpressEjsLayouts = require('express-ejs-layouts');
+const { InitSocketIo } = require("./utils/initSocketIo");
+const { socketHandler } = require("./socket");
 
 module.exports = class Application {
     #app = express();
@@ -16,6 +20,7 @@ module.exports = class Application {
         this.configApplication();
         this.createServer(PORT);
         this.connectToMongoDB(DB_URI);
+        this.initTemplateEngine();
         this.init_redis();
         this.createRoutes();
         this.createRoutes();
@@ -67,14 +72,25 @@ module.exports = class Application {
             )
         )
     }
+    initTemplateEngine() {
+        this.#app.set("view engine", "ejs");
+        this.#app.use(ExpressEjsLayouts)
+        this.#app.set("views", "resource/views");
+        this.#app.set("layout", "layouts/master");
+        this.#app.set("layout extractStyles", true);
+        this.#app.set("layout extractScripts", true);
+    }
     createServer(PORT) {
         const http = require("http");
         const server = http.createServer(this.#app);
+        const io = InitSocketIo(server);
+        socketHandler(io);
         server.listen(PORT, () => {
             return console.log(`Server Run on http://localhost:${PORT}`);
         })
     }
     connectToMongoDB(DB_URI) {
+        console.log(DB_URI)
         const mongoose = require('mongoose')
         mongoose.connect(DB_URI);
         mongoose.connection.on("connected", () => {
@@ -86,7 +102,7 @@ module.exports = class Application {
         })
     }
     init_redis() {
-        require("./utils/init_redis");
+        require("./utils/initRedis");
     }
     createRoutes() {
         this.#app.use(AllRoutes)

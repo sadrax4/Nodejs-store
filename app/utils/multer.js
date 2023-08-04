@@ -25,7 +25,6 @@ const storage = multer.diskStorage({
         cb(null, fileName);
     }
 })
-
 function fileFilter(req, file, cb) {
     const ext = path.extname(file.originalname) || "";
     const allowExt = [".png", ".jpg", ".jpeg", ".gif", ".webp"];
@@ -34,7 +33,6 @@ function fileFilter(req, file, cb) {
     }
     return cb(createHttpError.BadRequest("فرمت تصویر اشتباه است"));
 }
-
 function videoFileFilter(req, file, cb) {
     const ext = path.extname(file.originalname) || "";
     const allowExt = [".mp4", ".mp3", ".avi", ".mpg", ".mkv", ".mov"];

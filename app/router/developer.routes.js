@@ -64,5 +64,5 @@ router.get("/password-hash/:password", (req, res, next) => {
 })
 
 module.exports = {
-    developerRoutes: router
+    developerRouter: router
 }

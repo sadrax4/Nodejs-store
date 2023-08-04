@@ -1,7 +1,6 @@
 const { id } = require("@hapi/joi/lib/base");
 const createError = require("http-errors");
 const { createBlogSchema } = require("../../validator/admin/blog.schema");
-
 const router = require("express").Router();
 const prisma = (new (require("@prisma/client")).PrismaClient())
 /**

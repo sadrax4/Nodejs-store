@@ -22,4 +22,4 @@ router.use("/product", checkPermission([PERMISSIONS.SUPPLIER]), AdminProductApiR
 router.use("/category", checkPermission([PERMISSIONS.CONTENT_MANAGER]), AdminCategoryApiRouter);
 router.use("/permissions", checkPermission([PERMISSIONS.SUPERADMIN]), AdminPermissionsApiRouter);
 
-module.exports = { adminRoutes: router };
+module.exports = { adminRouter: router };
