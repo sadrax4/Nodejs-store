@@ -25,7 +25,7 @@ const { verifyToken } = require("../../middlewares/verifyToken");
  *          404:
  *               description: not Found             
  */
-router.get("/", verifyToken, homeController.indexPage);
+router.get("/", homeController.indexPage);
 module.exports = {
     homeRouter: router
 }

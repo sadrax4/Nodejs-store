@@ -1,6 +1,7 @@
 module.exports = {
     MongoIDPattern: /^[0-9a-fA-F]{24}$/,
     ImagePattern: /(\.png|\.jpg|\.webp|\.jpeg|\.gif)$/,
+    MobilePatter: /^09[0-9]{9}$/,
     EXPIRES_IN: (new Date().getTime() + 1200000),
     USER_ROLE: [
         "USER",
@@ -19,5 +20,6 @@ module.exports = {
         ALL: ["all"]
     }),
     SECRET_KEY: "960DE528DAF93E123145FF76AA43C7CCADEDB77702928ECE1E5AB13F76C40629",
-    REFRESH_TOKEN: "A6BE3254EB2B86DF0AB149AC130CFAC93E7C68B7D919377997C326312008DA17"
+    REFRESH_TOKEN: "A6BE3254EB2B86DF0AB149AC130CFAC93E7C68B7D919377997C326312008DA17",
+    
 }

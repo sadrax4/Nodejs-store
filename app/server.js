@@ -13,6 +13,10 @@ const ejs = require("ejs");
 const ExpressEjsLayouts = require('express-ejs-layouts');
 const { InitSocketIo } = require("./utils/initSocketIo");
 const { socketHandler } = require("./socket");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const { SECRET_KEY } = require("./utils/constans");
+const { clientHelper } = require("./utils/clientHelper");
 
 module.exports = class Application {
     #app = express();
@@ -27,6 +31,16 @@ module.exports = class Application {
         this.errorHandling();
     }
     configApplication() {
+        this.#app.use(cookieParser(SECRET_KEY));
+        this.#app.use(session({
+            resave: true,
+            saveUninitialized: true,
+            secret: SECRET_KEY,
+            cookie: {
+                secure: true
+            }
+        }))
+        this.#app.set("trust proxy", true);
         this.#app.use(cors());
         this.#app.use(bodyParser.urlencoded({ extended: true }));
         this.#app.use(bodyParser.json());
@@ -79,7 +93,12 @@ module.exports = class Application {
         this.#app.set("layout", "layouts/master");
         this.#app.set("layout extractStyles", true);
         this.#app.set("layout extractScripts", true);
+        this.#app.use((req, res, next) => {
+            this.#app.locals = clientHelper(req, res);
+            next();
+        })
     }
+
     createServer(PORT) {
         const http = require("http");
         const server = http.createServer(this.#app);

@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
     mobile: { type: String, required: true },
     email: { type: String, lowercase: true },
     password: { type: String },
+    token: { type: String, default: "" },
     otp: {
         type: Object, default: {
             code: 0,

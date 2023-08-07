@@ -16,7 +16,7 @@ const { EmailApiRouter } = require("./admin/email");
 const router = express.Router();
 
 router.use("/email", EmailApiRouter);
-router.use("/home", homeRouter);
+router.use("/home",  homeRouter);
 router.use("/support", SupportApiRouter)
 router.use("/room", RoomApiRouter)
 router.use("/namespace", NamespaceApiRouter)

@@ -1,8 +1,15 @@
 <div class="content">
     <div class="contact-profile">
-        <img src="http://emilcarlsson.se/assets/harveyspecter.png"
+        <img src="https://media-exp1.licdn.com/dms/image/C5603AQE3g9gHNfxGrQ/profile-displayphoto-shrink_200_200/0/1645507738281?e=1659571200&v=beta&t=wtwELdT1gp6ICp3UigC2EgutGAQgDP2sZKUx0mjCTwI"
             alt="" />
-        <input type="hidden" id="userID">
+        <%if(req.user.first_name && req.user.last_name){%>
+            <p><%=req.user.first_name+" "+ req.user.last_name%></p>
+        <%}else if(req.user.username){%>
+            <p><%=req.user.username%></p>
+        <%}else{%>
+            <p><%=req.user.mobile%></p>
+        <%}%>
+        <input type="hidden" id="userID" value="<%=req.user._id%>">
                     <div class="social-media">
                         <span id="onlinesCount"><strong>افراد آنلاین : </strong><span id="onlineCount">-</span></span>
                     </div>
@@ -13,7 +20,7 @@
     <div class="messages pb-5">
         <ul style="padding-bottom: 50px;">
             <li class="sent">
-                <img src="http://emilcarlsson.se/assets/harveyspecter.png"
+                <img src="http://emilcarlsson.se/assets/harveyspecter.png""
                     alt="" />
                 <p>salam dostan haleton chetore ? az course nodejs razi hastin?</p>
             </li>
